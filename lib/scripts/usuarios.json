@@ -1,0 +1,14 @@
+{
+    "usuarios":[
+        {
+            "nombre" : "Antonio",
+            "email"  : "antonio@example.com",
+            "clave"  : "1234"
+        },
+        {
+            "nombre" : "María",
+            "email"  : "maria@example.com",
+            "clave"  : "1234"
+        }
+    ]
+}

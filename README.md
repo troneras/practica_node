@@ -21,3 +21,7 @@ npm run dev
 - Configuramos express-validator y modificamos el output de errores en app.js
 
 - Instalación de mongoDB
+
+- Crear BBDD de prueba
+
+npm run installDB

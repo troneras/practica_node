@@ -30,9 +30,10 @@ app.use('/', index);
 app.use('/users', users);
 
 // rutas del APIv1
-// app.use('/apiv1/authenticate', require('./routes/apiv1/authenticate'));
+app.use('/apiv1/authenticate', require('./routes/apiv1/authenticate'));
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
-
+app.use('/apiv1/tags', require('./routes/apiv1/tags'));
+app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -49,6 +50,11 @@ app.use(function(err, req, res, next) {
     err.message = isAPI(req) ?
     { message: 'Not valid', errors: err.mapped()}
     : `Not valid - ${errInfo.param} ${errInfo.msg}`;
+  }
+
+  if(isAPI(req)){ // si es un API devuelvo JSON
+    res.json({ success: false, error: err.message});
+    return;
   }
 
   // set locals, only providing error in development
