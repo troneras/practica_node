@@ -19,3 +19,5 @@ npm run dev
 
 - Configuramos el view engine para que podamos editar ficheros html en las vistas usando el motor de plantillas ejs
 - Configuramos express-validator y modificamos el output de errores en app.js
+
+- Instalación de mongoDB

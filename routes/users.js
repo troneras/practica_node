@@ -1,5 +1,7 @@
 var express = require('express');
 var router = express.Router();
+// cargar el modelo de usuario
+const Usuario = require('../models/Usuario');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
