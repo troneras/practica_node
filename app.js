@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var i18n = require('./lib/i18n');
+var CustomError = require('./lib/files/CustomError');
 
 var index = require('./routes/index');
 var users = require('./routes/users');
@@ -13,10 +15,14 @@ var app = express();
 // cargamos el conector a la base de datos
 require('./lib/connectMongoose');
 
+
 // view engine setup 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 app.engine('html', require('ejs').__express);
+
+// traducciones añadidas como middleware
+app.use(i18n);
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -37,7 +43,7 @@ app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+  var err = new Error(res.__('No encontrado'));
   err.status = 404;
   next(err);
 });
@@ -53,7 +59,7 @@ app.use(function(err, req, res, next) {
   }
 
   if(isAPI(req)){ // si es un API devuelvo JSON
-    res.json({ success: false, error: err.message});
+    res.json(new CustomError(err.message));
     return;
   }
 

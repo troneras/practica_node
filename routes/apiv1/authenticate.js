@@ -5,7 +5,6 @@ const router  = express.Router();
 const {body, validationResult} = require('express-validator/check');
 const jwt = require('jsonwebtoken');
 const CustomError = require('../../lib/files/CustomError');
-
 // cargar el modelo de usuario
 const Usuario = require('../../models/Usuario');
 
@@ -23,7 +22,7 @@ router.post('/', [
     .matches(/\d/)
 ], (req, res, next) => {
     validationResult(req).throw();
-    // recogemos las credenciales
+    // recogemos las credenciales    
     const params = {};
     params.email = req.body.email;
     params.clave = req.body.clave;
@@ -36,7 +35,8 @@ router.post('/', [
         
         if(user === null){
             res.status = 401;
-            res.json(CustomError.APIerror('No se ha encontrado un usuario con esos datos'));
+           
+            res.json(new CustomError('No se ha encontrado un usuario con esos datos'));
             return;
         }
         // Si el usuario existe y la password coincide
