@@ -53,13 +53,12 @@ app.use(function(err, req, res, next) {
     err.status = 422;
     const errInfo = err.array({ onlyFirstError: true })[0];
     err.message = isAPI(req) ?
-    { message: 'Parámetros no válidos', errors: err.mapped()}
-    : `Parámetros no válidos - ${errInfo.param} ${errInfo.msg}`;
+    { message: 'InvalidParameters', errors: err.mapped()}
+    : `InvalidParameters - ${errInfo.param} ${errInfo.msg}`;
   }
 
   if(isAPI(req)){ // si es un API devuelvo JSON
-    res.status(err.status);
-    res.json(new CustomError('InvalidParameters',err.message,res));
+    res.json(new CustomError(err.message,res));
     return;
   }
 

@@ -45,14 +45,24 @@ const Usuario = require('../../models/Usuario');
  *      }
  *  } 
  * 
- * @apiError InvalidCredentials No se ha encontrado un usuario con esas credenciales
+ * @apiError InvalidEmail No existe ningún usuario registrado con ese email
  * 
  * @apiErrorExample
  *  HTTP/1.1 401 Not Found
  *  {
  *      "success": false,
- *      "code": "InvalidCredentials",
- *      "errors": "No se ha encontrado un usuario con esos datos"
+ *      "code": "InvalidEmail",
+ *      "errors": "No existe ningún usuario registrado con ese email"
+ *  } 
+ * 
+* @apiError InvalidPassword El password es incorrecto
+ * 
+ * @apiErrorExample
+ *  HTTP/1.1 401 Not Found
+ *  {
+ *      "success": false,
+ *      "code": "InvalidPassword",
+ *      "errors": "El password es incorrecto"
  *  } 
  */
 router.post('/', [
@@ -62,32 +72,17 @@ router.post('/', [
     .matches(/\d/)
 ], (req, res, next) => {
     validationResult(req).throw();
-    // recogemos las credenciales    
-    const params = {};
-    params.email = req.body.email;
-    params.clave = req.body.clave;
-    try{
 
+    try{
         // Obtener token del usuario
-        Usuario.authenticateUser(params)
+        Usuario.authenticateUser(req.body)
         .then(token => {
             res.json({success:true, token: token});
+            return;
         })
         .catch(err => {
-            if(err == 'InvalidEmail'){
-                res.status = 401;            
-                res.json(new CustomError('InvalidEmail','No existe ningún usuario registrado con ese email',res));
-                return;
-            }else if(err == 'InvalidPassword'){
-                res.status = 401;
-                res.json(new CustomError('InvalidPassword','El password es incorrecto',res));
-                return;
-            }else{
-                res.status(500);
-                console.log(new Error(err));
-                res.json(new CustomError('InternalServerError','Algo va muy mal...',res));
-                return;
-            }
+            res.json(new CustomError(err,res));
+            return;
         }); 
     }catch(err){
         console.log(new Error(err));

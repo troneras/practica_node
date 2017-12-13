@@ -46,16 +46,8 @@ router.post('/',[
         res.json({ success: true, result: newUser});
         return;
     }).catch(err => {
-        if(err == 'DuplicatedEmail'){
-            res.status(409); //Conflict
-            res.json(new CustomError('DuplicatedEmail','Ya existe un usuario registrado con ese email',res));
-            return;
-        }else{
-            res.status(500);
-            res.json(new CustomError('InternalServerError','Algo va muy mal...',res));
-            return;
-        }
-        
+        res.json(new CustomError(err));
+        return;        
     });    
 
     

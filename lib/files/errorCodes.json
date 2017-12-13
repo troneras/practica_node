@@ -1,0 +1,22 @@
+{
+    "InvalidEmail" : {
+        "status" : 401,
+        "msg" : "No existe ningún usuario registrado con ese email"
+    },
+    "InvalidPassword" : {
+        "status" : 401,
+        "msg" : "El password es incorrecto"
+    },
+    "InternalServerError" :{
+        "status" : 501,
+        "msg" : "Algo va muy mal..."
+    },
+    "DuplicatedEmail": {
+        "status" : 409,
+        "msg" : "Ya existe un usuario registrado con ese email"
+    },
+    "InvalidParameters" : {
+        "status": 422,
+        "msg" : "Parámetros no válidos"
+    }
+}
