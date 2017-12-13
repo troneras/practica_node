@@ -9,11 +9,51 @@ const CustomError = require('../../lib/files/CustomError');
 const Usuario = require('../../models/Usuario');
 
 /**
- * POST /authenticate
- * Autoriza a un usuario y devuelve su JSONWebToken
- * @param {string} email - El email del usuario
- * @param {string} clave - La password del usuario
- * @returns {json} {success : true|false , token:jsonwebtoken }
+ * @api {post} /authenticate Autoriza a un usuario y devuelve su JSONWebToken
+ * @apiName Authenticate
+ * @apiGroup Authenticate
+ * 
+ * @apiParam {string} email El email del usuario
+ * @apiParam {string} clave La password del usuario
+ * 
+ * @apiSuccess {boolean} success Si la llamada fue correcta
+ * @apiSuccess {string} token Token jwt que deberá usarse en todas las llamadas
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *      "success": true,
+ *      "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEyZWI5MzNhOTJjYzhhNjM0ZWZiMDcyIiwiaWF0IjoxNTEzMTYxOTM1LCJleHAiOjE1MTMzMzQ3MzV9.1nL547iBVB9sAFeQdG5hUPWTpvgX1ghdNGuLzocEajc"
+ *  }
+ * 
+ * @apiError InvalidParameters Los parámetros no son correctos
+ * 
+ * @apiErrorExample
+ *  HTTP/1.1 422 Unprocessable entity
+ *  {
+ *      "success": false,
+ *      "code": "InvalidParameters",
+ *      "errors": {
+ *          "message": "Parámetros no válidos",
+ *          "errors": {
+ *              "email": {
+ *                  "location": "body",
+ *                  "param": "email",
+ *                  "msg": "El email debe ser válido"
+ *             }
+ *          }
+ *      }
+ *  } 
+ * 
+ * @apiError InvalidCredentials No se ha encontrado un usuario con esas credenciales
+ * 
+ * @apiErrorExample
+ *  HTTP/1.1 401 Not Found
+ *  {
+ *      "success": false,
+ *      "code": "InvalidCredentials",
+ *      "errors": "No se ha encontrado un usuario con esos datos"
+ *  } 
  */
 router.post('/', [
     body('email').isEmail().withMessage('El email debe ser válido'),
@@ -31,12 +71,13 @@ router.post('/', [
     Usuario.findOne(params, (err, user) => {
         if(err){
             next(err);
+            return;
         }
         
         if(user === null){
             res.status = 401;
            
-            res.json(new CustomError('No se ha encontrado un usuario con esos datos',res));
+            res.json(new CustomError('InvalidCredentials','No se ha encontrado un usuario con esos datos',res));
             return;
         }
         // Si el usuario existe y la password coincide

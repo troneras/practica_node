@@ -1,3 +1,8 @@
 {
-	/* Los errores están escritos en español por lo que no hace falta rellenar éste fichero */
+	"No se ha encontrado un usuario con esos datos": "No se ha encontrado un usuario con esos datos",
+	"Tipo puede ser venta o busqueda": "Tipo puede ser venta o busqueda",
+	"InvalidParameters": "InvalidParameters",
+	"Parámetros no válidos": "Parámetros no válidos",
+	"El email debe ser válido": "El email debe ser válido",
+	"Ya existe un usuario registrado con ese email": "Ya existe un usuario registrado con ese email"
 }

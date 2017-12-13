@@ -10,7 +10,7 @@
   },
   "apidoc": {
     "title": "API de prueba creada con Node y mongoDB",
-    "url" : "https://github.com/troneras/practica_node"
+    "url": "https://github.com/troneras/practica_node"
   },
   "dependencies": {
     "body-parser": "~1.18.2",
@@ -26,6 +26,7 @@
     "mongodb": "^3.0.0-rc0",
     "mongoose": "^4.13.6",
     "morgan": "~1.9.0",
+    "password-hash": "^1.2.2",
     "serve-favicon": "~2.4.5",
     "validator": "^9.2.0"
   },

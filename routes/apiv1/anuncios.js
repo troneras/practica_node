@@ -9,16 +9,59 @@ const Anuncio = require('../../models/Anuncio');
 
 
 /**
- * GET /anuncios
- * Obtener una lista de anuncios
- * @param tipo - venta o busqueda
- * @param tag - work, lifestyle, motor y mobile - Pueden enviarse varios separados por espacio
- * @param min - precio mínimo del anuncio
- * @param max - precio máximo del anuncio
- * @param nombre - que empiece por el dato buscado
- * @param limit - limitar el número de anuncios devueltos
- * @param skip - saltar anuncios
- * @returns {json} - {success: true|false, result: [{Anuncios}...]}
+ * @api {get} /anuncios Recuperar una lista de anuncios
+ * @apiName GetAnuncios
+ * @apiGroup Anuncio
+ *
+ * @apiParam  {String} tipo Buscar por tipo de anuncio: venta o busqueda
+ * @apiParam  {String} tag Buscar por tag: work, lifestyle, motor y mobile - Pueden enviarse varios separados por espacio
+ * @apiParam  {Number} min Precio mínimo del anuncio
+ * @apiParam  {Number} max Precio máximo del anuncio
+ * @apiParam  {String} nombre Nombre que empiece por el dato buscado
+ * @apiParam  {Number} limit Limitar el número de anuncios devueltos
+ * @apiParam  {Number} skip Saltar anuncios
+ * 
+ * @apiSuccess {boolean} success Si la llamada fue correcta
+ * @apiSuccess {array} result Array con los anuncios disponibles
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *    {
+ *       success: true,
+ *       result: [
+ *           {
+ *               _id: "5a2eb933a92cc8a634efb070",
+ *               nombre: "iPhone 3GS",
+ *               venta: false,
+ *               precio: 50,
+ *               foto: "images/anuncios/iphone.png",
+ *               tags: [
+ *                   "lifestyle",
+ *                   "mobile"
+ *               ]
+ *           }
+ *       ]
+ *   }
+ *
+ * @apiError InvalidParameters
+ * 
+ * @apiErrorExample
+ *  HTTP/1.1 422 Unprocessable entity
+ *  {
+ *      success: false,
+ *      code: "InvalidParameters",
+ *      errors: {
+ *          message: "Parámetros no válidos",
+ *          errors: {
+ *              tipo: {
+ *              location: "query",
+ *              param: "tipo",
+ *              value: "cosa",
+ *              msg: "Tipo puede ser venta o busqueda"
+ *          }
+ *      }
+ *  }
+ * 
  */
 router.get('/',[
     query('tipo').optional().isIn(['venta','busqueda']).withMessage('Tipo puede ser venta o busqueda'),
@@ -71,9 +114,23 @@ router.get('/',[
 });
 
 /**
- * GET /anuncios/tags
- * Obtener una lista de tags
- * @returns {json} - {success: true|false, result: [Tags...]}
+ * @api {get} /anuncios/tags Recuperar los tags de anuncios existentes
+ * @apiName GetTags
+ * @apiGroup Anuncio
+ * 
+ * @apiSuccess {boolean} success Si la llamada fue correcta
+ * @apiSuccess {array} result Array con los tags disponibles
+ * 
+ * @apiSuccessExample Success-Response:
+ *  HTTP/1.1 200 OK
+ *  {
+ *      success: true,
+ *      result: [
+ *          "lifestyle",
+ *          "motor",
+ *          "mobile"
+ *      ]
+ *  } 
  */
 router.get('/tags',  async (req, res, next) => {
     try{

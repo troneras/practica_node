@@ -58,7 +58,8 @@ app.use(function(err, req, res, next) {
   }
 
   if(isAPI(req)){ // si es un API devuelvo JSON
-    res.json(new CustomError(err.message,res));
+    res.status(err.status);
+    res.json(new CustomError('InvalidParameters',err.message,res));
     return;
   }
 

@@ -1,25 +1,32 @@
 'use strict';
 
 const mongoose = require('mongoose');
+const passwordHash = require('password-hash');
 
 // primero creamos el esquema
 const usuarioSchema = mongoose.Schema({
     nombre: String,
     email: { type: String, index: true, unique: true},
-    clave: String    
+    clave: { type: String, select: false}    
 });
 
-// Creamos un método estático
-// anuncioSchema.statics.list = function(filters, limit, skip, sort, fields){
-//     const query = Agente.find(filters);
-//     // obtenemos la query sin ejecular
-//     query.limit(limit);
-//     query.skip(skip);
-//     query.sort(sort);
-//     query.select(fields);
-//     // ejecutamos la query y devolvemos una promesa
-//     return query.exec();
-// };
+
+usuarioSchema.statics.registerUser =  function(user){
+    // hash de la password
+    user.clave = passwordHash.generate(user.clave);
+    // creamos un usuario en memoria
+    const newUser = new Usuario(user);
+    // lo persistimos en la colección de usuarios
+    return new Promise((resolve, reject) =>{
+        newUser.save().then(usuarioCreado => {
+            resolve (usuarioCreado);
+        }).catch(err => {
+            reject ('DuplicatedUser');
+        });
+    } );
+    
+
+};
 
 // y por último creamos el modelo
 const Usuario = mongoose.model('Usuario', usuarioSchema);

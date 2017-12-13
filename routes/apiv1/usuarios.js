@@ -10,12 +10,25 @@ const Usuario = require('../../models/Usuario');
 
 
 /**
- * POST /usuarios
- * Registrar un usuario
- * @param {string} nombre - the name of the user
- * @param {string} email - the email of the user
- * @param {string} clave - the password of the user
- * @returns {boolean} - si el usuario se ha creado
+ * @api {post} /usuarios Registrar un nuevo usuario y devuelve el nuevo usuario creado
+ * @apiName CreateUser
+ * @apiGroup Usuario
+ * 
+ * @apiParam {String} nombre  El nombre del usuario
+ * @apiParam {String} email  El email del usuario
+ * @apiParam {String} clave  La contraseña del usuario
+ * @apiPeturns {boolean} - si el usuario se ha creado
+ * 
+ *  {
+ *      "success": true,
+ *      "result": {
+ *          "__v": 0,
+ *          "nombre": "Test",
+ *          "email": "test@example.com",
+ *          "clave": "12345",
+ *          "_id": "5a310feb99e91e8c189d63a0"
+ *      }
+ *  }
  * @returns {object} - el usuario creado
  */
 router.post('/',[
@@ -27,17 +40,19 @@ router.post('/',[
 
 ],  (req, res, next) => {
     validationResult(req).throw();
-    // creamos un usuario en memoria
-    const usuario = new Usuario(req.body);
+
+    //Registrar el usuario
+    Usuario.registerUser(req.body).then(newUser => {
+        res.json({ success: true, result: newUser});
+        return;
+    }).catch(err => {
+        res.status(409); //Conflict
+        res.json(new CustomError('DuplicatedEmail','Ya existe un usuario registrado con ese email',res));
+        return;
+        
+    });    
+
     
-    // lo persistimos en la colección de usuarios
-    usuario.save((err, usuarioGuardado) => {
-        if(err){
-            next(err);
-            return;
-        }
-        res.json({ success: true, result: usuarioGuardado});
-    });
 });
 
 module.exports = router;
