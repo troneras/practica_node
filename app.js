@@ -38,7 +38,6 @@ app.use('/users', users);
 // rutas del APIv1
 app.use('/apiv1/authenticate', require('./routes/apiv1/authenticate'));
 app.use('/apiv1/anuncios', require('./routes/apiv1/anuncios'));
-app.use('/apiv1/tags', require('./routes/apiv1/tags'));
 app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler

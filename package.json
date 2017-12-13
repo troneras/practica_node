@@ -1,12 +1,16 @@
 {
   "name": "practica",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
     "cluster": "node ./bin/cluster",
     "installDB": "node ./lib/scripts/install_bd",
     "dev": "cross-env DEBUG=practica:* nodemon ./bin/www"
+  },
+  "apidoc": {
+    "title": "API de prueba creada con Node y mongoDB",
+    "url" : "https://github.com/troneras/practica_node"
   },
   "dependencies": {
     "body-parser": "~1.18.2",

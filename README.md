@@ -1,27 +1,32 @@
 # PRÁCTICA DE NODE Y MONGODB
+## DOCUMENTACIÓN 
+Puede acceder a la documentación de la api desde TODO
 
-- Empezamos creando un repositorio git en una carpeta vacía. Después generamos el package.json usando 
+## Despliegue 
+1. Configurar las variables de entorno:
+- Copiar el fichero .env.example a .env y modificar las variables de entorno 
+2. Ejecutar npm install para que se instalen todas las librerías y dependencias necesarias
 
-npm install --y
+## Cargar BBDD con datos de prueba
+La aplicación permite cargar unos datos de prueba en la BBDD para tener usuario y anuncios de test.
 
-- Después generamos la estructura de una aplicación express e instalamos los módulos 
-
-express . --ejs
-npm install
-
-- Incluímos en el comando start de npm las variables para modificar el modo de arranque en desarrollo, con el log debug activado y nodemon
-
-"dev": "cross-env DEBUG=practica:* nodemon ./bin/www"
-
-Se ejecuta utilizando el comando:
-
-npm run dev
-
-- Configuramos el view engine para que podamos editar ficheros html en las vistas usando el motor de plantillas ejs
-- Configuramos express-validator y modificamos el output de errores en app.js
-
-- Instalación de mongoDB
-
-- Crear BBDD de prueba
-
+-Para generar la BBDD de prueba ejecutar:
 npm run installDB
+
+## Arrancar servidor
+La aplicación arrancará un proceso servidor y conectará con el servidor de la BBDD
+- Primero crear un directorio si no existe \data\db dónde se guardarán las BBDD de *mongoDB*
+- Luego ir al directorio dónde está instalado *mongoDB* y arrancar *mongoDB* ejecutando:
+.\bin\mongod --dbpath <\data\db> --directoryperdb
+
+## Modo cluster
+El modo cluster permite al servidor lanzar tantos procesos como cores tiene la CPU de la máquina para poder procesar el mayor número de peticiones posible. 
+- Para ejecutar el servidor en modo cluster debemos ejecutar el comando:
+
+npm run cluster
+
+## Modo desarrollo 
+El modo desarrollo permite arrancar el servidor con la salida de errores por consola y utilizando nodemon.
+
+- Se ejecuta utilizando el comando:
+npm run dev
