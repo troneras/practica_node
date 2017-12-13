@@ -43,7 +43,7 @@ app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error(res.__('No encontrado'));
+  var err = new Error(res.__('No encontrado'),res);
   err.status = 404;
   next(err);
 });
@@ -54,12 +54,12 @@ app.use(function(err, req, res, next) {
     err.status = 422;
     const errInfo = err.array({ onlyFirstError: true })[0];
     err.message = isAPI(req) ?
-    { message: 'Not valid', errors: err.mapped()}
-    : `Not valid - ${errInfo.param} ${errInfo.msg}`;
+    { message: 'Parámetros no válidos', errors: err.mapped()}
+    : `Parámetros no válidos - ${errInfo.param} ${errInfo.msg}`;
   }
 
   if(isAPI(req)){ // si es un API devuelvo JSON
-    res.json(new CustomError(err.message));
+    res.json(new CustomError(err.message,res));
     return;
   }
 

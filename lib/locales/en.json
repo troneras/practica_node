@@ -1,5 +1,15 @@
 {
-    "No se ha encontrado un usuario con esos datos" : "No user found with provided data",
-    "No encontrado" : "Not Found"
-
+	"No se ha encontrado un usuario con esos datos": "No user found with provided data",
+	"No encontrado": "Not Found",
+	"Parámetros no válidos": "Not valid parameters",
+	"La clave debe ser de al menos 4 carácteres y contener un número": "The \"clave\" parameter must be at least 4 characters and contain a number",
+	"El email debe ser válido" : "The email must be valid",
+	"El nombre sólo puede contener letras a-zA-Z" : "The \"nombre\" parameter can only be a name sith a-zA-Z characters",
+	"Tipo puede ser venta o busqueda" : "The \"tipo\" parameter only can be {venta | busqueda}",
+	"min es un número": "The \"min\" parameter is a number",
+	"max es un número": "The \"max\" parameter is a number",
+	"El nombre sólo puede contener letras, números y espacios": "The \"nombre\" parameter can only contain letters, numbers or spaces",
+	"El tag sólo puede contener letras, números y espacios": "The \"tag\" parameter can only contain letters, numbers or spaces",
+	"limit es un número": "The \"limit\" parameter is a number",
+	"skip es un número": "The \"skip\" parameter is a number"
 }

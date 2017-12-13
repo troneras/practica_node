@@ -36,7 +36,7 @@ router.post('/', [
         if(user === null){
             res.status = 401;
            
-            res.json(new CustomError('No se ha encontrado un usuario con esos datos'));
+            res.json(new CustomError('No se ha encontrado un usuario con esos datos',res));
             return;
         }
         // Si el usuario existe y la password coincide
