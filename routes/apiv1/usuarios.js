@@ -17,19 +17,45 @@ const Usuario = require('../../models/Usuario');
  * @apiParam {String} nombre  El nombre del usuario
  * @apiParam {String} email  El email del usuario
  * @apiParam {String} clave  La contraseña del usuario
- * @apiPeturns {boolean} - si el usuario se ha creado
+ * 
+ * @apiReturns {boolean} success- si el usuario se ha creado
+ * @apiReturns {object} result- el nuevo usuario creado
  * 
  *  {
  *      "success": true,
  *      "result": {
- *          "__v": 0,
  *          "nombre": "Test",
- *          "email": "test@example.com",
- *          "clave": "12345",
+ *          "email": "test`@`example.com",
  *          "_id": "5a310feb99e91e8c189d63a0"
  *      }
  *  }
- * @returns {object} - el usuario creado
+ * 
+ * @apiError InvalidParameters Los parámetros no son correctos
+ * 
+ * @apiErrorExample
+ *  HTTP/1.1 422 Unprocessable entity
+ *  {
+ *      "success": false,
+ *      "code": "InvalidParameters",
+ *      "errors": {
+ *          "message": "Parámetros no válidos",
+ *          "errors": {
+ *              "email": {
+ *                  "location": "body",
+ *                  "param": "email",
+ *                  "msg": "El email debe ser válido"
+ *             }
+ *          }
+ *      }
+ *  } 
+ * 
+ * @apiError DuplicatedEmail 
+ *  HTTP/1.1 409 Conflict
+ *  {
+ *      "success": false,
+ *      "code": "DuplicatedEmail",
+ *      "errors": "The email is already registered with another user"
+ *  }
  */
 router.post('/',[
     body('nombre').isAlpha().withMessage('El nombre sólo puede contener letras a-zA-Z'),    
@@ -41,15 +67,18 @@ router.post('/',[
 ],  (req, res, next) => {
     validationResult(req).throw();
 
-    //Registrar al usuario
-    Usuario.registerUser(req.body).then(newUser => {
-        res.json({ success: true, result: newUser});
-        return;
-    }).catch(err => {
-        res.json(new CustomError(err));
-        return;        
-    });    
-
+    try{
+        //Registrar al usuario
+        Usuario.registerUser(req.body).then(newUser => {
+            res.json({ success: true, result: newUser});
+            return;
+        }).catch(err => {
+            res.json(new CustomError(err,res));
+            return;        
+        });    
+    }catch(err){
+        console.log(new Error(err));
+    }
     
 });
 

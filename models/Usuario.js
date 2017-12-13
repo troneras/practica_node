@@ -21,12 +21,12 @@ const usuarioSchema = mongoose.Schema({
 *           - InternalServerError 
 */
 usuarioSchema.statics.registerUser =  function(user){
-    // hash de la password
-    user.clave = bcrypt.hashSync(user.clave);
-    // creamos un usuario en memoria
-    const newUser = new Usuario(user);
-    // lo persistimos en la colección de usuarios
     return new Promise((resolve, reject) =>{
+        // hash de la password
+        user.clave = bcrypt.hashSync(user.clave);
+        // creamos un usuario en memoria
+        const newUser = new Usuario(user);
+        // lo persistimos en la colección de usuarios
         newUser.save().then(usuarioCreado => {
             // Devolvemos un objeto usuario sin el password ni el __v             
             usuarioCreado = usuarioCreado.toObject(); // convertir a objeto js normal
@@ -36,8 +36,9 @@ usuarioSchema.statics.registerUser =  function(user){
         }).catch(err => {
             if(err.code == 11000){
                 reject('DuplicatedEmail');
+            }else{
+                reject (err.code);
             }
-            reject (err.code);
         });
     } );
 };

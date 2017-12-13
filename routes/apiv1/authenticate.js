@@ -55,7 +55,7 @@ const Usuario = require('../../models/Usuario');
  *      "errors": "No existe ningún usuario registrado con ese email"
  *  } 
  * 
-* @apiError InvalidPassword El password es incorrecto
+ * @apiError InvalidPassword El password es incorrecto
  * 
  * @apiErrorExample
  *  HTTP/1.1 401 Not Found
