@@ -3,7 +3,7 @@
 const express = require('express');
 const router  = express.Router();
 const {body, validationResult} = require('express-validator/check');
-const jwt = require('jsonwebtoken');
+
 const CustomError = require('../../lib/files/CustomError');
 // cargar el modelo de usuario
 const Usuario = require('../../models/Usuario');
@@ -66,37 +66,32 @@ router.post('/', [
     const params = {};
     params.email = req.body.email;
     params.clave = req.body.clave;
+    try{
 
-    // Buscamos en la base de datos de usuario 
-    Usuario.findOne(params, (err, user) => {
-        if(err){
-            next(err);
-            return;
-        }
-        
-        if(user === null){
-            res.status = 401;
-           
-            res.json(new CustomError('InvalidCredentials','No se ha encontrado un usuario con esos datos',res));
-            return;
-        }
-        // Si el usuario existe y la password coincide
-        // creamos un token y lo devolvemos
-        // no firmar objetos de mongoose, usar mejor un nuevo objeto solo con lo mínimo
-        const usuario = { _id : user._id};
-        jwt.sign({ user_id: usuario._id}, process.env.JWT_SECRET, {
-            expiresIn: process.env.JWT_EXPIRES_IN
-        }, (err, token) => {
-            if(err){
-                next(err);
+        // Obtener token del usuario
+        Usuario.authenticateUser(params)
+        .then(token => {
+            res.json({success:true, token: token});
+        })
+        .catch(err => {
+            if(err == 'InvalidEmail'){
+                res.status = 401;            
+                res.json(new CustomError('InvalidEmail','No existe ningún usuario registrado con ese email',res));
+                return;
+            }else if(err == 'InvalidPassword'){
+                res.status = 401;
+                res.json(new CustomError('InvalidPassword','El password es incorrecto',res));
+                return;
+            }else{
+                res.status(500);
+                console.log(new Error(err));
+                res.json(new CustomError('InternalServerError','Algo va muy mal...',res));
                 return;
             }
-    
-            // y lo devolvemos
-            res.json({ success: true, token: token});
-        });
-    });    
-
+        }); 
+    }catch(err){
+        console.log(new Error(err));
+    }
 });
 
 module.exports = router;

@@ -19,12 +19,12 @@
         {
             "nombre" : "Antonio",
             "email"  : "antonio@example.com",
-            "clave"  : "1234"
+            "clave"  : "$2a$10$Loz2FCeHDtFLxRj/7Yu7KOssLloPozOM66gwldyBjm41NUH0NG9A2"
         },
         {
             "nombre" : "María",
             "email"  : "maria@example.com",
-            "clave"  : "1234"
+            "clave"  : "$2a$10$Loz2FCeHDtFLxRj/7Yu7KOssLloPozOM66gwldyBjm41NUH0NG9A2"
         }
     ]
 }

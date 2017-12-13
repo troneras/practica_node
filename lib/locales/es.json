@@ -4,5 +4,9 @@
 	"InvalidParameters": "InvalidParameters",
 	"Parámetros no válidos": "Parámetros no válidos",
 	"El email debe ser válido": "El email debe ser válido",
-	"Ya existe un usuario registrado con ese email": "Ya existe un usuario registrado con ese email"
+	"Ya existe un usuario registrado con ese email": "Ya existe un usuario registrado con ese email",
+	"Usuario.authenticateUser is not a function": "Usuario.authenticateUser is not a function",
+	"Algo va muy mal...": "Algo va muy mal...",
+	"No existe ningún usuario registrado con ese email": "No existe ningún usuario registrado con ese email",
+	"El password es incorrecto": "El password es incorrecto"
 }

@@ -41,14 +41,20 @@ router.post('/',[
 ],  (req, res, next) => {
     validationResult(req).throw();
 
-    //Registrar el usuario
+    //Registrar al usuario
     Usuario.registerUser(req.body).then(newUser => {
         res.json({ success: true, result: newUser});
         return;
     }).catch(err => {
-        res.status(409); //Conflict
-        res.json(new CustomError('DuplicatedEmail','Ya existe un usuario registrado con ese email',res));
-        return;
+        if(err == 'DuplicatedEmail'){
+            res.status(409); //Conflict
+            res.json(new CustomError('DuplicatedEmail','Ya existe un usuario registrado con ese email',res));
+            return;
+        }else{
+            res.status(500);
+            res.json(new CustomError('InternalServerError','Algo va muy mal...',res));
+            return;
+        }
         
     });    
 

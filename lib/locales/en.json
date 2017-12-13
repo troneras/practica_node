@@ -17,5 +17,8 @@
 	"Usuario.checkIfUserExists is not a function": "Usuario.checkIfUserExists is not a function",
 	"TypeError: Usuario.checkIfUserExists is not a function": "TypeError: Usuario.checkIfUserExists is not a function",
 	"Can't set headers after they are sent.": "Can't set headers after they are sent.",
-	"Cannot read property 'then' of undefined": "Cannot read property 'then' of undefined"
+	"Cannot read property 'then' of undefined": "Cannot read property 'then' of undefined",
+	"No existe ningún usuario registrado con ese email":"No user found with provided email",
+	"El password es incorrecto" : "The password is incorrect",
+	"Algo va muy mal..." : "Something is really wrong..."
 }
