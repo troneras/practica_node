@@ -9,12 +9,20 @@ const CustomError = require('../../lib/files/CustomError');
 const Usuario = require('../../models/Usuario');
 
 /**
- * @api {post} /authenticate Autoriza a un usuario y devuelve su JSONWebToken
+ * @api {post} /authenticate Login
+ * @apiDescription Autoriza a un usuario y devuelve su JSONWebToken
+ * @apiVersion 1.0.0
  * @apiName Authenticate
  * @apiGroup Authenticate
  * 
  * @apiParam {string} email El email del usuario
  * @apiParam {string} clave La password del usuario
+ *
+ * @apiHeader {String} Accept-Language Idioma del usuario [es,en]. Default es 
+ * @apiHeaderExample {json} Accept-Language:
+ *     {
+ *       "Accept-Language": "en"
+ *     }
  * 
  * @apiSuccess {boolean} success Si la llamada fue correcta
  * @apiSuccess {string} token Token jwt que deberá usarse en todas las llamadas

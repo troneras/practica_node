@@ -1,6 +1,8 @@
 {
   "name": "practica",
-  "version": "0.1.0",
+  "description": "\tAPI que muestra un listado de anuncios y permite filtrar por ellos.\n Los usuarios pueden darse de alta y autenticarse.\n\n\tAPI disponible en Español e Inglés",
+  "homepage": "https://github.com/troneras/practica_node",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node ./bin/www",
@@ -10,7 +12,7 @@
   },
   "apidoc": {
     "title": "API de prueba creada con Node y mongoDB",
-    "url": "https://github.com/troneras/practica_node"
+    "url": "http://localhost:3000/apiv1"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",

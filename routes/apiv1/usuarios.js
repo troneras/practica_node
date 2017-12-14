@@ -10,16 +10,24 @@ const Usuario = require('../../models/Usuario');
 
 
 /**
- * @api {post} /usuarios Registrar un nuevo usuario y devuelve el nuevo usuario creado
+ * @api {post} /usuarios Registrar usuario
+ * @apiDescription  Registra un nuevo usuario y devuelve el nuevo usuario creado
  * @apiName CreateUser
  * @apiGroup Usuario
  * 
+ * @apiVersion 1.0.0
  * @apiParam {String} nombre  El nombre del usuario
  * @apiParam {String} email  El email del usuario
  * @apiParam {String} clave  La contraseña del usuario
  * 
- * @apiReturns {boolean} success- si el usuario se ha creado
- * @apiReturns {object} result- el nuevo usuario creado
+ * @apiHeader {String} Accept-Language Idioma del usuario [es,en]. Default es 
+ * @apiHeaderExample {json} Accept-Language:
+ *     {
+ *       "Accept-Language": "en"
+ *     }
+ * 
+ * @apiSuccess {boolean} success- si el usuario se ha creado
+ * @apiSuccess {object} result- el nuevo usuario creado
  * 
  *  {
  *      "success": true,
@@ -50,6 +58,7 @@ const Usuario = require('../../models/Usuario');
  *  } 
  * 
  * @apiError DuplicatedEmail 
+ * @apiErrorExample
  *  HTTP/1.1 409 Conflict
  *  {
  *      "success": false,

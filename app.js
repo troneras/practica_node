@@ -42,7 +42,8 @@ app.use('/apiv1/usuarios', require('./routes/apiv1/usuarios'));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  var err = new Error(res.__('No encontrado'),res);
+  
+  var err = new Error('NotFound',res);
   err.status = 404;
   next(err);
 });

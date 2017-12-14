@@ -3,16 +3,34 @@
 const express = require('express');
 const router  = express.Router();
 const {query, validationResult} = require('express-validator/check');
-// const jwtAuth = require('../../lib/jwtAuth');
+const jwtAuth = require('../../lib/jwtAuth');
 // cargar el modelo de anuncio
 const Anuncio = require('../../models/Anuncio');
-
+// este middleware se ejecuta siempre antes que cualquier otro para pedir credenciales
+router.use(jwtAuth());
 
 /**
- * @api {get} /anuncios Recuperar una lista de anuncios
+ * @api {get} /anuncios Listar anuncios
+ * @apiDescription Permite realizar una búsqueda filtrada y paginada de los anuncios disponibles.
+ * Es necesario que el usuario esté autorizado en la api para mostrar los resultados.
+ * 
  * @apiName GetAnuncios
  * @apiGroup Anuncio
- *
+ * @apiVersion 1.0.0
+ * 
+ * @apiHeader {String} Accept-Language Idioma del usuario [es,en]. Default es 
+ * @apiHeaderExample {json} Accept-Language:
+ *     {
+ *       "Accept-Language": "en"
+ *     }
+ * 
+ * @apiHeader {String} x-access-token Token jwt del usuario 
+ * @apiHeaderExample {json} x-access-token:
+ *     {
+ *       "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEzMTliYzE2ZDY3YmNkNTMwZDYxM2RkIiwiaWF0IjoxNTEzMjA1MjY2LCJleHAiOjE1MTMzNzgwNjZ9.EnA-ng5V_v5wmKk44zDKWTcdxhUP4FxONYNVbQnHWVY"
+ *     }
+ * 
+ * 
  * @apiParam  {String} tipo Buscar por tipo de anuncio: venta o busqueda
  * @apiParam  {String} tag Buscar por tag: work, lifestyle, motor y mobile - Pueden enviarse varios separados por espacio
  * @apiParam  {Number} min Precio mínimo del anuncio
@@ -43,7 +61,7 @@ const Anuncio = require('../../models/Anuncio');
  *       ]
  *   }
  *
- * @apiError InvalidParameters
+ * @apiError InvalidParameters Parámetros no válidos
  * 
  * @apiErrorExample
  *  HTTP/1.1 422 Unprocessable entity
@@ -114,9 +132,23 @@ router.get('/',[
 });
 
 /**
- * @api {get} /anuncios/tags Recuperar los tags de anuncios existentes
+ * @api {get} /anuncios/tags Listar tags
+ * @apiDescription Permite recuperar los tags de los diferentes anuncios que existen
+ * Es necesario que el usuario esté autorizado para ver éste recurso
  * @apiName GetTags
  * @apiGroup Anuncio
+ * @apiVersion 1.0.0
+ * @apiHeader {String} Accept-Language Idioma del usuario [es,en]. Default es 
+ * @apiHeaderExample {json} Accept-Language:
+ *     {
+ *       "Accept-Language": "en"
+ *     }
+ * 
+ * @apiHeader {String} x-access-token Token jwt del usuario 
+ * @apiHeaderExample {json} x-access-token:
+ *     {
+ *       "x-access-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWEzMTliYzE2ZDY3YmNkNTMwZDYxM2RkIiwiaWF0IjoxNTEzMjA1MjY2LCJleHAiOjE1MTMzNzgwNjZ9.EnA-ng5V_v5wmKk44zDKWTcdxhUP4FxONYNVbQnHWVY"
+ *     }
  * 
  * @apiSuccess {boolean} success Si la llamada fue correcta
  * @apiSuccess {array} result Array con los tags disponibles

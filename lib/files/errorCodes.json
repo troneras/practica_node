@@ -18,5 +18,17 @@
     "InvalidParameters" : {
         "status": 422,
         "msg" : "Parámetros no válidos"
+    },
+    "NoTokenProvided" : {
+        "status": 401,
+        "msg" : "Debe incluír el token jwt obtenido de authenticate en el header x-access-token"
+    },
+    "InvalidToken":{
+        "status": 401,
+        "msg" : "El token es inválido"
+    },
+    "NotFound":{
+        "status": 404,
+        "msg" : "El documento no existe"
     }
 }

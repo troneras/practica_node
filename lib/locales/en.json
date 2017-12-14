@@ -20,5 +20,8 @@
 	"Cannot read property 'then' of undefined": "Cannot read property 'then' of undefined",
 	"No existe ningún usuario registrado con ese email":"No user found with provided email",
 	"El password es incorrecto" : "The password is incorrect",
-	"Algo va muy mal..." : "Something is really wrong..."
+	"Algo va muy mal..." : "Something is really wrong...",
+	"Debe incluír el token jwt obtenido de authenticate en el header x-access-token": "You have to include the jwt token obtained from authenticate in x-access-token header",
+	"El token es inválido" : "Invalid token",
+	"El documento no existe" : "Document not found"
 }

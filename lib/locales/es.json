@@ -9,5 +9,8 @@
 	"Algo va muy mal...": "Algo va muy mal...",
 	"No existe ningún usuario registrado con ese email": "No existe ningún usuario registrado con ese email",
 	"El password es incorrecto": "El password es incorrecto",
-	"La clave debe ser de al menos 4 carácteres y contener un número": "La clave debe ser de al menos 4 carácteres y contener un número"
+	"La clave debe ser de al menos 4 carácteres y contener un número": "La clave debe ser de al menos 4 carácteres y contener un número",
+	"No encontrado": "No encontrado",
+	"Debe incluír el token jwt obtenido de authenticate en el header x-access-token": "Debe incluír el token jwt obtenido de authenticate en el header x-access-token",
+	"El documento no existe": "El documento no existe"
 }
