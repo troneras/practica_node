@@ -10,13 +10,6 @@ Puede acceder a la documentación de la api desde [apidoc](http://localhost:3000
 ```bash
 npm install
 ```
-## Cargar BBDD con datos de prueba
-La aplicación permite cargar unos datos de prueba en la BBDD para tener usuario y anuncios de test.
-
--Para generar la BBDD de prueba ejecutar:
-```bash
-npm run installDB
-```
 ## Arrancar servidor
 La aplicación arrancará un proceso servidor y conectará con el servidor de la BBDD
 
@@ -25,6 +18,14 @@ La aplicación arrancará un proceso servidor y conectará con el servidor de la
 ```bash
 .\bin\mongod --dbpath <\data\db> --directoryperdb
 ```
+## Cargar BBDD con datos de prueba
+La aplicación permite cargar unos datos de prueba en la BBDD para tener usuario y anuncios de test.
+
+-Para generar la BBDD de prueba ejecutar:
+```bash
+npm run installDB
+```
+
 ## Modo cluster
 El modo cluster permite al servidor lanzar tantos procesos como cores tiene la CPU de la máquina para poder procesar el mayor número de peticiones posible.
  
