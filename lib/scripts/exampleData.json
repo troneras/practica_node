@@ -12,7 +12,7 @@
             "venta": false,
             "precio": 50.00,
             "foto": "images/anuncios/iphone.png",
-            "tags": [ "lifestyle", "mobile"]
+            "tags": [ "lifestyle", "mobile" , "work"]
         }
     ],
     "usuarios":[

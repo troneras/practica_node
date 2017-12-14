@@ -40,6 +40,15 @@ El modo desarrollo permite arrancar el servidor con la salida de errores por con
 ```bash
 npm run dev
 ```
+
+## Modo normal
+Sin salida debug, ni nodemon.
+
+- Se ejecuta utilizando el comando:
+```bash
+npm run start
+```
+
 ----
 ***Autor**: Antonio Blázquez Bea
 
