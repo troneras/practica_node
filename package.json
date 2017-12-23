@@ -1,5 +1,5 @@
 {
-  "name": "practica",
+  "name": "practica_node",
   "description": "\tAPI que muestra un listado de anuncios y permite filtrar por ellos.\n Los usuarios pueden darse de alta y autenticarse.\n\n\tAPI disponible en Español e Inglés",
   "homepage": "https://github.com/troneras/practica_node",
   "version": "1.0.0",
@@ -8,7 +8,7 @@
     "start": "node ./bin/www",
     "cluster": "node ./bin/cluster",
     "installDB": "node ./lib/scripts/install_bd",
-    "dev": "cross-env DEBUG=practica:* nodemon ./bin/www"
+    "dev": "cross-env DEBUG=practica_node:* nodemon ./bin/www"
   },
   "apidoc": {
     "title": "API de prueba creada con Node y mongoDB",
