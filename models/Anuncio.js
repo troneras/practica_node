@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 // primero creamos el esquema
 const anuncioSchema = mongoose.Schema({
     nombre: { type: String,  index: 'text', unique: true},
-    venta: Boolean,
-    precio: Number,
+    venta: { type: Boolean, index:true},
+    precio: { type: Number, index:true},
     foto: String,
-    tags: { type: [{ type: String, enum: ['work', 'lifestyle', 'motor', 'mobile'] }] }  
+    tags: { type: [{ type: String, enum: ['work', 'lifestyle', 'motor', 'mobile'] }], index:true }  
 });
 
 // Creamos un método estático
