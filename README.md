@@ -10,7 +10,7 @@ El proyecto no tiene ninguna portada así que se muestra la que trae Express por
 Como ejemplo de la parte estática, se puede acceder a la [documentación](http://devops-kc.westeurope.cloudapp.azure.com/apidoc/)
 o también se puede consultar alguna de las [imágenes](http://devops-kc.westeurope.cloudapp.azure.com/images/anuncios/bici.jpg)
 
-Para acceder a ficheros no estáticos se pueden hacer llamadas a la api: por ejemplo listar anuncios
+Para acceder a ficheros no estáticos se pueden hacer llamadas a la api: por ejemplo listar
 [anuncios](http://devops-kc.westeurope.cloudapp.azure.com/apiv1/anuncios)
 
 Devolverá un error en formato JSON porque no estás autorizado.
