@@ -1,7 +1,31 @@
+
+---
+## SOLUCIÓN PRÁCTICA DEVOPS
+---
+El proyecto está desplegado en: 
+[http://devops-kc.westeurope.cloudapp.azure.com/](http://devops-kc.westeurope.cloudapp.azure.com/apidoc/)
+El proyecto no tiene ninguna portada así que se muestra la que trae Express por defecto. 
+
+### SOLUCIÓN EJERCICIO 1
+Como ejemplo de la parte estática, se puede acceder a la [documentación](http://devops-kc.westeurope.cloudapp.azure.com/apidoc/)
+o también se puede consultar alguna de las [imágenes](http://devops-kc.westeurope.cloudapp.azure.com/images/anuncios/bici.jpg)
+
+Para acceder a ficheros no estáticos se pueden hacer llamadas a la api: por ejemplo listar anuncios
+[anuncios](http://devops-kc.westeurope.cloudapp.azure.com/apiv1/anuncios)
+
+Devolverá un error en formato JSON porque no estás autorizado.
+
+### SOLUCIÓN EJERCICIO 2
+La ip del servidor de azure es: [http://13.95.166.81/](http://13.95.166.81/) 
+Si se accede a ella se muestra una plantilla bootstrap como se pide. 
+
+Fin solucón práctica DEVOPS.
+
+---
 # PRÁCTICA DE NODE Y MONGODB
 ---
 ## DOCUMENTACIÓN 
-Puede acceder a la documentación de la api desde [apidoc](http://localhost:3000/apidoc)
+Puede acceder a la documentación de la api desde [apidoc](http://devops-kc.westeurope.cloudapp.azure.com/apidoc/)
 
 ## Despliegue 
 1. Configurar las variables de entorno:
